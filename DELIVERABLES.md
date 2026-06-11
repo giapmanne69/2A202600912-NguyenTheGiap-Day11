@@ -199,8 +199,7 @@ python main.py --part 4  # HITL design
 
 ### Step 1 — Clone & Enter Repo
 ```bash
-git clone https://github.com/VinUni-AI20k/Day-11-Guardrails-HITL-Responsible-AI.git
-cd Day-11-Guardrails-HITL-Responsible-AI
+git clone <Github repo link>
 ```
 
 ### Step 2 — Create Virtual Environment (Python 3.11)
