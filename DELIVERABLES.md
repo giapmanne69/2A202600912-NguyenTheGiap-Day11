@@ -173,7 +173,7 @@ Response Delivery & Logging
 
 ### Security Report
 ```bash
-cd e:\VinAI\D11-11.6.2026\2A202600912-NguyenTheGiap-Day11
+cd <path-to-the-source-code>\2A202600912-NguyenTheGiap-Day11
 cat security_audit.json
 ```
 
