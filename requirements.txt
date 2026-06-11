@@ -1,3 +1,8 @@
 google-genai>=1.0.0
 google-adk>=0.3.0
 nemoguardrails>=0.10.0
+langchain-google-genai>=1.0.0
+langchain>=0.3.0
+langchain-community>=0.3.0
+python-dotenv>=1.0.1
+litellm>=1.75.5
