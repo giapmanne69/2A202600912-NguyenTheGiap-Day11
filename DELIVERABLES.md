@@ -193,6 +193,84 @@ python main.py --part 4  # HITL design
 
 ---
 
+## Setup from Scratch (New Machine)
+
+> **Required**: Python 3.11. Other versions may cause dependency conflicts with `google-adk` and `nemoguardrails`.
+
+### Step 1 — Clone & Enter Repo
+```bash
+git clone https://github.com/VinUni-AI20k/Day-11-Guardrails-HITL-Responsible-AI.git
+cd Day-11-Guardrails-HITL-Responsible-AI
+```
+
+### Step 2 — Create Virtual Environment (Python 3.11)
+```bash
+# Windows
+py -3.11 -m venv .venv311
+
+# macOS / Linux
+python3.11 -m venv .venv311
+```
+
+### Step 3 — Install Dependencies
+```bash
+# Windows
+.venv311\Scripts\pip install -r requirements.txt
+
+# macOS / Linux
+.venv311/bin/pip install -r requirements.txt
+```
+
+### Step 4 — Configure `.env`
+Create a `.env` file in the repo root with one of the two backend options:
+
+**Option A — OpenRouter (recommended, free tier available)**
+```env
+OPENAI_API_KEY=sk-or-v1-xxxxxxxxxxxxxxxxxxxx
+OPENAI_MODEL=openai/gpt-oss-120b:free
+OPENAI_BASE_URL=https://openrouter.ai/api/v1
+```
+Get a free key at: https://openrouter.ai/keys
+
+**Option B — Google Gemini (fallback)**
+```env
+GOOGLE_API_KEY=AIzaSy-xxxxxxxxxxxxxxxxxxxx
+```
+Get a free key at: https://aistudio.google.com/apikey  
+> ⚠️ Free tier limit: 20 req/day. Part 3 alone makes ~30+ calls → will hit quota.
+
+### Step 5 — Run Tests
+
+> **Important:** Always use the venv python, NOT system python.  
+> System python does NOT have `litellm` installed → `ValueError: Model not found`.
+
+```bash
+# Windows
+cd src
+..\\.venv311\Scripts\python.exe main.py --part 1   # Attacks
+..\\.venv311\Scripts\python.exe main.py --part 2   # Guardrails
+..\\.venv311\Scripts\python.exe main.py --part 3   # Security Testing Pipeline
+..\\.venv311\Scripts\python.exe main.py --part 4   # HITL Design
+
+# macOS / Linux
+cd src
+../.venv311/bin/python main.py --part 1
+../.venv311/bin/python main.py --part 2
+../.venv311/bin/python main.py --part 3
+../.venv311/bin/python main.py --part 4
+```
+
+### Common Issues
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `ValueError: Model openai/... not found` | Running with system Python instead of venv | Use `.venv311\Scripts\python.exe` |
+| `429 RESOURCE_EXHAUSTED` | Gemini free tier quota exceeded (20 req/day) | Switch to OpenRouter (Option A in `.env`) |
+| `ModuleNotFoundError: No module named 'core'` | Running `python main.py` from wrong directory | `cd src/` first, then run |
+| `CommandNotFoundException: ../.venv311/...` | PowerShell uses `\` not `/` for paths | Use `..\.venv311\Scripts\python.exe` on Windows |
+
+---
+
 ## Key Learnings
 
 1. **Multi-layered Defense**: Input + Output guardrails + NeMo rules provide defense-in-depth
@@ -202,5 +280,3 @@ python main.py --part 4  # HITL design
 5. **Audit & Monitoring**: Security audit logs critical for compliance and post-incident analysis
 
 ---
-
-**Status**: Ready for submission ✅
